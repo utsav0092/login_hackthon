@@ -37,21 +37,16 @@ app.get('/login', (req, res) => {
     res.render('login.ejs')
 })
 
-// app.post('/login', passport.authenticate('local', {
-//     successRedirect: 'https://me-lier.github.io/locator.github.io/',
-//     failureRedirect: '/login',
-//     failureFlash: true
-// }))
-
 app.post('/login', (req, res, next) => {
-    const inputCode = req.body.code;  // Get the code from the request body
+    const inputCode = req.body.code;
     if (inputCode !== '1210') {
         req.flash('error', 'Incorrect code');
-        return res.redirect('/login');  // Redirect if the code is incorrect
+        return res.redirect('/login');
     }
 
     passport.authenticate('local', {
-        successRedirect: 'https://me-lier.github.io/locator.github.io/',
+        // successRedirect: 'https://me-lier.github.io/locator.github.io/',
+        successRedirect: 'https://mapmatching.streamlit.app/',
         failureRedirect: '/login',
         failureFlash: true
     })(req, res, next);
